@@ -36,4 +36,33 @@ public:
 
         return maxSum;  // maximum subarray sum found
     }
+
+    //printing the maximum subarray
+    void printMaxSubArray(vector<int>& nums) {
+        int sum = 0;
+        int maxSum = INT_MIN;
+        int start = 0, end = 0, tempStart = 0;
+
+        for(int i = 0; i < nums.size(); i++) {
+            sum += nums[i];
+
+            if(sum > maxSum) {
+                maxSum = sum;
+                start = tempStart;
+                end = i;
+            }
+
+            if(sum < 0) {
+                sum = 0;
+                tempStart = i + 1; // reset start to the next index
+            }
+        }
+
+        cout << "Maximum Subarray Sum: " << maxSum << endl;
+        cout << "Subarray: ";
+        for(int i = start; i <= end; i++) {
+            cout << nums[i] << " ";
+        }
+        cout << endl;
+    }
 };
